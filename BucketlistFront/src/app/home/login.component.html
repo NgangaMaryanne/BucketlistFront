@@ -1,0 +1,22 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="wrap">
+                <p class="form-title">
+                    Sign In</p>
+                <form class="login" (ngSubmit)="login()" novalidate>
+                    <div>
+                        <input type="text" placeholder="email" name="email" [(ngModel)]="model.email" required  />
+                    </div>
+                    <div>
+                        <input type="password" placeholder="Password" name="password" [(ngModel)]="model.password" required   />
+                    </div>
+                    <div>
+                        <button [disabled]="loading" class="btn btn-primary">Login</button>
+                        <a [routerLink]="['/register']" class="btn btn-link">Register</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
