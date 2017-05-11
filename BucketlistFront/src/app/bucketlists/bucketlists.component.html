@@ -1,6 +1,20 @@
 <div class = 'container'>
     <h1> {{pageTitle}}</h1>
-    <p> Heyy fjakdfkajfkana</p>
+    <div class='table-responsive'>
+        <table class='table' *ngIf = 'allBuckets && allBuckets.length'>
+                <thead>
+                    <tr>
+                        <th>Bucketlist</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor = 'let bucket of allBuckets'>
+
+                        <td><a [routerLink] = "['/bucketlists', bucket.id]">{{bucket.name}}</a></td>
+                    </tr>
+                </tbody>
+    </table>
+    </div>
     <div>
     <h3> Add new Bucketlists</h3>
         <form (ngSubmit)="createBucketlist()" novalidate>

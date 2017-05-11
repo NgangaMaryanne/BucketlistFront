@@ -17,6 +17,8 @@ import { LoginComponent } from './home/login.component';
 import { RegisterComponent } from './home/register.component';
 import {WelcomeComponent} from './home/welcome.component';
 import { BucketlistComponent} from './bucketlists/bucketlists.component';
+import {BucketlistDetailComponent } from './bucketlists/bucketlist-details.component';
+import {BucketlistDetailGuard } from './_services/bucketlist-guard.service';
 
 
 @NgModule({
@@ -26,7 +28,8 @@ import { BucketlistComponent} from './bucketlists/bucketlists.component';
     LoginComponent,
     RegisterComponent,
     WelcomeComponent,
-    BucketlistComponent
+    BucketlistComponent, 
+    BucketlistDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -40,8 +43,8 @@ import { BucketlistComponent} from './bucketlists/bucketlists.component';
     AlertService,
     AuthenticationService,
     RegisterService,
-    BucketlistService
-
+    BucketlistService, 
+    BucketlistDetailGuard
   ],
   bootstrap: [AppComponent]
 })

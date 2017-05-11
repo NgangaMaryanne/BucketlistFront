@@ -15,18 +15,37 @@ export class BucketlistService {
     //Gets all bucketlists.
     getBucketlists() :Observable <IBucketlist[]> {
         return this.http.get(this.config.apiUrl + '/api/v1/bucketlists', { headers: this.header})
-        .map((response: Response) => <IBucketlist[]>response.json())
-         .do(data => console.log('All: ' + JSON.stringify(data)))
+        .map((response: Response) =><IBucketlist[]>response.json().results)
          .catch(this.handleError);
     }
 
+    //create one bucketlist.
     createBucketlist(newBucketlist: IBucketlist){
         let bucketData = {
             "name": newBucketlist.name
         }
         return this.http.post(this.config.apiUrl + '/api/v1/bucketlists', bucketData,  {headers: this.header});
     }
-     private handleError(error:Response){
+
+    //get onse bucketlist.
+    getOneBucketlist(bucketId):Observable <IBucketlist> {
+        return this.http.get(this.config.apiUrl + '/api/v1/bucketlists/'+bucketId, { headers: this.header})
+        .map((response: Response) => <IBucketlist[]>response.json())
+         .do(data => console.log('All: ' + JSON.stringify(data)))
+         .catch(this.handleError);
+    }
+    updateBucketlist(bucketId, updatedBucket: IBucketlist){
+        let bucketData = {
+            "name":updatedBucket.name
+        }
+        return this.http.put(this.config.apiUrl + '/api/v1/bucketlists/'+ bucketId, bucketData, { headers: this.header})
+    }
+
+    deleteBucketlist(bucketId){
+        return this.http.delete(this.config.apiUrl + '/api/v1/bucketlists' + bucketId, {headers: this.header})
+    }
+
+    private handleError(error:Response){
         console.error(error);
         return Observable.throw(error.json().error || 'Server error');
     }

@@ -12,11 +12,11 @@ import { BucketlistService} from '../_services/bucketlists.service';
 }
 )
 
-export class BucketlistComponent {
+export class BucketlistComponent implements OnInit{
     model: any = {};
     loading = false;
     pageTitle: string = 'This are your bucketlists.';
-    bucketlists : IBucketlist[];
+    allBuckets : any=[];
     errorMessage: string;
 
 
@@ -27,7 +27,7 @@ export class BucketlistComponent {
     ){}
     ngOnInit(): void{
         this.bucketlistService.getBucketlists().subscribe(bucketlists => {
-            this.bucketlists = bucketlists;
+            this.allBuckets = bucketlists[0];
         },
         error => this.errorMessage = <any> error);
     }

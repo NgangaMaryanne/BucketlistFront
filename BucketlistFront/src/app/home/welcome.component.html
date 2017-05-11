@@ -1,7 +1,17 @@
-<div>
-    <h1> {{pageTitle}}</h1>
-    <div class='nav nav-default'>
-        <p>Welcome to bucketlist </p>
-        <p> Features</p>
+<div  class='container welcome'>
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <h1> {{pageTitle}}</h1>
+        </div>
     </div>
-<div>
+    <div class = "row">
+        <div class = "col-md-4">
+        </div>
+        <div class = "col-md-4">
+            <a [routerLink]="['/register']" class="btn btn-orange"> Register </a>
+            <a [routerLink]="['/login']" class="btn btn-orange"> Login</a>
+        </div>
+        <div class = "col-md-4">
+        </div>
+    </div>
+</div>
