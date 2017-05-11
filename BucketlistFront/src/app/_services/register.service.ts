@@ -17,7 +17,7 @@ export class RegisterService{
             'password': user.password
         }
         let header = this.makeHeader();
-        return this.http.post(this.config.apiUrl + '/auth/register', body, {headers: header} );
+        return this.http.post(this.config.apiUrl + '/auth/register', body, {headers: header } );
     }
 
     private makeHeader (){

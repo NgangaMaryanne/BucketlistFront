@@ -17,7 +17,8 @@ export class AuthenticationService{
             let loginResponse = response.json();
             this.userToken = loginResponse.auth_token;
             if (loginResponse && this.userToken){
-                localStorage.setItem('currentUser', JSON.stringify(loginResponse))
+
+                localStorage.setItem('currentUser', JSON.stringify(loginResponse.auth_token))
             }
         });
     }

@@ -1,0 +1,15 @@
+<div class = 'container'>
+    <h1> {{pageTitle}}</h1>
+    <p> Heyy fjakdfkajfkana</p>
+    <div>
+    <h3> Add new Bucketlists</h3>
+        <form (ngSubmit)="createBucketlist()" novalidate>
+            <div>
+                 <input type="text" placeholder="bucketlist name" name="name" [(ngModel)]="model.name" required  />
+            </div>
+            <div>
+                <button [disabled]="loading" class="btn btn-primary" type="submit">Create</button>
+            </div>
+        </form>
+    </div>
+</div>
