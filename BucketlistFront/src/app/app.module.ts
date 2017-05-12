@@ -13,6 +13,7 @@ import { AlertService} from './_services/alert.service';
 import { AuthenticationService} from './_services/authentication.service';
 import { RegisterService} from './_services/register.service';
 import {BucketlistService} from  './_services/bucketlists.service';
+import { BucketlistItemService } from './_services/bucketlist-items.service';
 import { LoginComponent } from './home/login.component';
 import { RegisterComponent } from './home/register.component';
 import {WelcomeComponent} from './home/welcome.component';
@@ -46,6 +47,7 @@ import {BucketlistDetailGuard } from './_services/bucketlist-guard.service';
     AuthenticationService,
     RegisterService,
     BucketlistService, 
+    BucketlistItemService,
     BucketlistDetailGuard
   ],
   bootstrap: [AppComponent]

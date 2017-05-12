@@ -4,13 +4,14 @@
         <table class='table' *ngIf = 'allBuckets && allBuckets.length'>
                 <thead>
                     <tr>
+                        <th> Id </th>
                         <th>Bucketlist</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor = 'let bucket of allBuckets'>
-
-                        <td><a [routerLink] = "['/bucketlists', bucket.id]">{{bucket.name}}</a></td>
+                    <td> {{bucket.id }}</td>
+                        <td> <a [routerLink] = "['/bucketlists', bucket.id]" class="btn btn-link">{{ bucket.name }} </a> </td>
                         <td> 
                             <div class="dropdown">
                                 <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" data-hover="dropdown">

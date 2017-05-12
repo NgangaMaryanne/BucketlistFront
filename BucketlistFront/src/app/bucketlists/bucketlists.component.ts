@@ -18,6 +18,7 @@ export class BucketlistComponent implements OnInit{
     pageTitle: string = 'This are your bucketlists.';
     allBuckets : any=[];
     errorMessage: string;
+    bucketlist;
     
     constructor(
         private router: Router,
@@ -60,6 +61,14 @@ export class BucketlistComponent implements OnInit{
                 this.router.navigate(['/bucketlists']);
                 this.loading = false;
             });
+    }
+    getOneBucket(bucketId){
+        this.bucketlistService.getOneBucketlist(bucketId).subscribe(bucketlist => {
+            this.bucketlist = bucketlist;
+            console.log("hkjfuaikhnfakngakjngakjgn", this.bucketlist)
+            this.router.navigate(['/bucketlists/:id', bucketId])
+        },
+        error => this.errorMessage = <any> error);
     }
 
 }

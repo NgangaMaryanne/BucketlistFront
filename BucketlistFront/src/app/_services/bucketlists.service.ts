@@ -28,9 +28,9 @@ export class BucketlistService {
     }
 
     //get onse bucketlist.
-    getOneBucketlist(bucketId):Observable <IBucketlist> {
-        return this.http.get(this.config.apiUrl + '/api/v1/bucketlists/'+bucketId, { headers: this.header})
-        .map((response: Response) => <IBucketlist[]>response.json())
+    getOneBucketlist(bucketId) {
+        return this.http.get(this.config.apiUrl + '/api/v1/bucketlists/' +bucketId, { headers: this.header})
+        .map((response: Response) => response.json())
          .catch(this.handleError);
     }
     updateBucketlist(bucketId, updatedBucket: IBucketlist){

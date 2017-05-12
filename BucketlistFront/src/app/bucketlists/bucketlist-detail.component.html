@@ -2,6 +2,33 @@
     <div class='panel-heading'>
         {{pageTitle}}
     </div>
+    <div class="container">
+        <div class="table-responsive">
+            <table *ngIf = 'bucketlistItems && bucketlistItems.length'>
+                <thead>
+                        <tr>
+                            <th>Items</th>
+                        </tr>
+                    </thead>
+                    <tbody > 
+                    <tr *ngFor = 'let item of bucketlistItems'>
+                        <td> {{item.name}}</td>
+                    </tr>
+                    </tbody>
+            </table>
+        </div>
+    </div>
+    <div>
+        <form (ngSubmit)="addItem()" novalidate>
+            <div>
+                 <input type="text" placeholder="item name" name="name" [(ngModel)]="model.name" required  />
+            </div>
+            <div>
+                <button [disabled]="loading" class="btn btn-primary" type="submit">Create</button>
+            </div>
+        </form>
+
+    </div>
     <div class='panel-footer'> 
         <a class='btn btn-default'(click)='onBack()' style='width:80px'>
             <i class='glyphicon glyphicorn-chevron-left'></i> Back

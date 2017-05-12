@@ -14,8 +14,8 @@ const appRoutes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
     {path: 'bucketlists', component: BucketlistComponent},
-    {path: 'bucketlists/:id', canActivate: [BucketlistDetailGuard], component: BucketlistDetailComponent},
-    {path: 'updatebucket/:id', canActivate:[BucketlistDetailGuard], component: BucketlistUpdateComponent},
+    {path: 'bucketlists/:bucketId', canActivate: [BucketlistDetailGuard], component: BucketlistDetailComponent},
+    {path: 'updatebucket/:bucketId', canActivate:[BucketlistDetailGuard], component: BucketlistUpdateComponent},
     
  
     // otherwise redirect to home
