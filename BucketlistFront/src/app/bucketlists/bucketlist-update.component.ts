@@ -20,10 +20,10 @@ export class BucketlistUpdateComponent{
         private alertService: AlertService,
         private bucketlistService: BucketlistService
     ){}
-    updateBucket(bucketId){
+    updateBucket(bucketid){
         this.loading = true;
-        let id = + this._route.snapshot.params['id'];
-        this.bucketlistService.updateBucketlist(id, this.model)
+        let bucketId = + this._route.snapshot.params['bucketId'];
+        this.bucketlistService.updateBucketlist(bucketId, this.model)
         .subscribe(
             data => {
                 this.alertService.success('Bucketlist updated successfully', true);
