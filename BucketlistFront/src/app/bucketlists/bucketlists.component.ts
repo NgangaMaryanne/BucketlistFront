@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { IBucketlist} from '../_models/bucketlist';
@@ -18,8 +18,7 @@ export class BucketlistComponent implements OnInit{
     pageTitle: string = 'This are your bucketlists.';
     allBuckets : any=[];
     errorMessage: string;
-
-
+    
     constructor(
         private router: Router,
         private alertService: AlertService,
@@ -38,7 +37,23 @@ export class BucketlistComponent implements OnInit{
         .subscribe(
             data => {
                 this.alertService.success('Bucketlist created successfully', true);
+                this.ngOnInit()
+                this.model.name = '';
+            },
+            error =>{
+                this.alertService.error('Please try again', true);
                 this.router.navigate(['/bucketlists']);
+                this.loading = false;
+            });
+    }
+    deleteBucket(bucketId){
+        this.loading=true;
+        this.bucketlistService.deleteBucketlist(bucketId)
+        .subscribe(
+            data => {
+                this.alertService.success('Bucketlist deleted successfully', true);
+                this.ngOnInit()
+                this.model.name = '';
             },
             error =>{
                 this.alertService.error('Please try again', true);
