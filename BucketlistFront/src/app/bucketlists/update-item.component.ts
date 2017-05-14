@@ -28,11 +28,11 @@ export class ItemUpdateComponent{
         .subscribe(
             data => {
                 this.alertService.success('Item updated successfully', true);
-                this.router.navigate(['/bucketlists']);
+                this.router.navigate(['/bucketlists/'+bucketId]);
             },
             error =>{
                 this.alertService.error('Please try again', true);
-                this.router.navigate(['/bucketlists']);
+                this.router.navigate(['/bucketlists/' +bucketId]);
                 this.loading = false;
             });
         }
