@@ -9,6 +9,7 @@ import { BucketlistService} from '../_services/bucketlists.service';
     selector: 'bl-bucketlists',
     templateUrl: 'bucketlists.component.html',
     moduleId: module.id,
+
 }
 )
 
@@ -18,6 +19,7 @@ export class BucketlistComponent implements OnInit{
     pageTitle: string = 'These are your bucketlists.';
     allBuckets : any=[];
     errorMessage: string;
+    bucketSearch: string;
     bucketlist;
     
     constructor(

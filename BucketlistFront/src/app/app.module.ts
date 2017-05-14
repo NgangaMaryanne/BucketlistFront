@@ -22,6 +22,7 @@ import { BucketlistUpdateComponent} from './bucketlists/bucketlist-update.compon
 import {BucketlistDetailComponent } from './bucketlists/bucketlist-details.component';
 import { ItemUpdateComponent} from './bucketlists/update-item.component';
 import {BucketlistDetailGuard } from './_services/bucketlist-guard.service';
+import {BucketlistSearchPipe} from './bucketlists/bucketlist-search.pipe';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import {BucketlistDetailGuard } from './_services/bucketlist-guard.service';
     BucketlistComponent, 
     BucketlistDetailComponent,
     BucketlistUpdateComponent,
-     ItemUpdateComponent
+     ItemUpdateComponent,
+     BucketlistSearchPipe
   ],
   imports: [
     BrowserModule,
