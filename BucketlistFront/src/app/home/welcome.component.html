@@ -1,7 +1,9 @@
-<div>
-    <h1> {{pageTitle}}</h1>
-    <div class='nav nav-default'>
-        <p>Welcome to bucketlist </p>
-        <p> Features</p>
+<div  class='row'>
+ <div class="col-md-4">
+        </div>
+    <div class="col-md-6 " >
+        <h1> {{pageTitle}}</h1>
+        <a [routerLink]="['/register']" class="btn btn-orange"> Register </a>
+        <a [routerLink]="['/login']" class="btn btn-orange"> Login</a>
     </div>
-<div>
+</div>

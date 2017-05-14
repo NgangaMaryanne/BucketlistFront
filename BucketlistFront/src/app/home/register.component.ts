@@ -13,7 +13,7 @@ export class RegisterComponent{
     model: any = {};
     loading = false;
     pageTitle: string = 'Register';
-    firstName: string;
+    
 
     constructor (
         private router: Router,

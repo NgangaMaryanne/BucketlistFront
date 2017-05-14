@@ -1,0 +1,18 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div>
+                Update Item
+            </div>
+            <form name="form" (ngSubmit)="updateItem()" novalidate>
+                <div class="form-group">
+                    <input type="text" placeholder="New item name" class="form-control" name="name" [(ngModel)]="model.name" #name="ngModel" required />
+                    <input type="text" placeholder="input 'true' or 'false'" class="form-control" name="done" [(ngModel)]="model.done" #done="ngModel" />
+                </div>
+                <div>
+                    <button [disabled]="loading" class="btn btn-primary" type="submit">Update</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

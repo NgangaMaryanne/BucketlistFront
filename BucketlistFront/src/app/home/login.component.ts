@@ -25,7 +25,9 @@ export class LoginComponent{
         this.loading = true;
         this.authenticationService.login(this.model.email, this.model.password)
         .subscribe(
-            data => {this.router.navigate([this.returnUrl])},
+            data => {
+                this.router.navigate(['/bucketlists']);
+            },
             error => {
                 this.alertService.error(error._body);
                 this.loading = false;

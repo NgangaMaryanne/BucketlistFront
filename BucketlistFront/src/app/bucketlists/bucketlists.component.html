@@ -1,0 +1,47 @@
+<div class = 'container'>
+    <div class='row'>
+            <div class='col-md-2'> Search bucketlists </div>
+            <div class='col-md-4'>
+                <input [(ngModel)] = 'bucketSearch' type='text' />
+            </div>
+    </div>
+    <div class='table-responsive'>
+     <h1> {{pageTitle}}</h1>
+        <table class='table' *ngIf = 'allBuckets && allBuckets.length'>
+                <thead>
+                    <tr>
+                        <th> Id </th>
+                        <th>Bucketlist</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor = 'let bucket of allBuckets | bucketlistSearch:bucketSearch'>
+                    <td> {{bucket.id }}</td>
+                        <td> <a [routerLink] = "['/bucketlists', bucket.id]" class="btn btn-link">{{ bucket.name }} </a> </td>
+                        <td> 
+                            <div class="dropdown">
+                                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" data-hover="dropdown">
+                                Actions <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li> <a [routerLink] = "['/updatebucket', bucket.id]" class="btn btn-link">Update</a></li>
+                                    <li> <a (click)='deleteBucket(bucket.id)' class="btn btn-link">Delete</a> </li>
+                                </ul>
+                            </div> 
+                        </td>
+                    </tr>
+                </tbody>
+    </table>
+    </div>
+    <div>
+    <h3> Add new Bucketlists</h3>
+        <form (ngSubmit)="createBucketlist()" novalidate>
+            <div>
+                 <input type="text" placeholder="bucketlist name" name="name" [(ngModel)]="model.name" required />
+            </div>
+            <div>
+                <button [disabled]="loading" class="btn btn-primary" type="submit">Create</button>
+            </div>
+        </form>
+    </div>
+</div>
