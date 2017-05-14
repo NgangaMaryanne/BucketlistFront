@@ -18,6 +18,19 @@ export class BucketlistItemService{
         }
         return this.http.post(this.config.apiUrl + '/api/v1/bucketlists/' + bucketId+ '/items', itemData,  {headers: this.header});
     }
+
+    updateItem(bucketId, itemId, updatedItem:IItem){
+        let Updateditem = {
+            "name":updatedItem.name,
+            "done": updatedItem.done
+        }
+         return this.http.put(this.config.apiUrl + '/api/v1/bucketlists/' + bucketId+ '/items/' + itemId, Updateditem,  {headers: this.header});
+    }
+
+    deleteItem(bucketId, itemId){
+        return this.http.delete(this.config.apiUrl + '/api/v1/bucketlists/' + bucketId + '/items/' + itemId, {headers: this.header})
+    }
+
     private makeHeaders (){
         let currentUser = JSON.parse(localStorage.getItem('currentUser'));
         let head = new Headers ();

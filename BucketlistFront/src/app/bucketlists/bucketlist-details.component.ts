@@ -16,6 +16,7 @@ export class BucketlistDetailComponent implements OnInit{
     bucketlistItems:any=[];
     errorMessage: string;
     model:any = {};
+    bucketId = + this._route.snapshot.params['bucketId'];
 
     constructor(private _router: Router,
                 private _route: ActivatedRoute,
@@ -23,8 +24,7 @@ export class BucketlistDetailComponent implements OnInit{
                 private bucketlistService: BucketlistService,
                 private itemService: BucketlistItemService){}
     ngOnInit(){
-        let bucketId = + this._route.snapshot.params['bucketId'];
-        this.bucketlistService.getOneBucketlist(bucketId).subscribe(bucketlist => {
+        this.bucketlistService.getOneBucketlist(this.bucketId).subscribe(bucketlist => {
         this.bucketlistItems = bucketlist.items; 
         },
         error => this.errorMessage = <any> error);
@@ -35,9 +35,14 @@ export class BucketlistDetailComponent implements OnInit{
     }
 
     addItem(){
-        let bucketId = this._route.snapshot.params['bucketId'];
-        this.itemService.createItem(bucketId, this.model).subscribe(items =>this.bucketlistItems = items)
+        this.itemService.createItem(this.bucketId, this.model).subscribe(items =>this.bucketlistItems = items)
         this.ngOnInit();
         this.model.name = '';
+    }
+  
+    deleteItem(itemId){
+        let bucketId = this._route.snapshot.params['bucketId'];
+        this.itemService.deleteItem(bucketId, itemId).subscribe(items=> this.bucketlistItems = items);
+        this.ngOnInit();
     }
 }

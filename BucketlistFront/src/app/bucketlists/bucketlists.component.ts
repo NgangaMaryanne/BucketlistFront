@@ -15,7 +15,7 @@ import { BucketlistService} from '../_services/bucketlists.service';
 export class BucketlistComponent implements OnInit{
     model: any = {};
     loading = false;
-    pageTitle: string = 'This are your bucketlists.';
+    pageTitle: string = 'These are your bucketlists.';
     allBuckets : any=[];
     errorMessage: string;
     bucketlist;
@@ -38,7 +38,8 @@ export class BucketlistComponent implements OnInit{
         .subscribe(
             data => {
                 this.alertService.success('Bucketlist created successfully', true);
-                this.ngOnInit()
+                this.ngOnInit();
+                this.loading = false;
                 this.model.name = '';
             },
             error =>{
@@ -53,7 +54,8 @@ export class BucketlistComponent implements OnInit{
         .subscribe(
             data => {
                 this.alertService.success('Bucketlist deleted successfully', true);
-                this.ngOnInit()
+                this.ngOnInit();
+                this.loading = false;
                 this.model.name = '';
             },
             error =>{

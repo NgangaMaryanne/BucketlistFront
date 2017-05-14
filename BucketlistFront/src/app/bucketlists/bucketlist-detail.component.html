@@ -1,37 +1,51 @@
-<div class='panel panel-primary'>
-    <div class='panel-heading'>
-        {{pageTitle}}
+<div class="table-responsive">
+    <div *ngIf = 'bucketlistItems && !bucketlistItems.length'>
+        You currently have no items in this bucketlist.
     </div>
-    <div class="container">
-        <div class="table-responsive">
-            <table *ngIf = 'bucketlistItems && bucketlistItems.length'>
-                <thead>
-                        <tr>
-                            <th>Items</th>
-                        </tr>
-                    </thead>
-                    <tbody > 
-                    <tr *ngFor = 'let item of bucketlistItems'>
-                        <td> {{item.name}}</td>
-                    </tr>
-                    </tbody>
-            </table>
+    <table class = "table" *ngIf = 'bucketlistItems && bucketlistItems.length'>
+        <thead>
+                <tr>
+                    <th>Items</th>
+                    <th> Done</th>
+                    <th> Actions </th>
+                </tr>
+            </thead>
+            <tbody > 
+            <tr *ngFor = 'let item of bucketlistItems'>
+                <td> {{ item.name }}</td>
+                <td> {{ item.done }}</td>
+                <td>
+                    <div class="dropdown">
+                        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" data-hover="dropdown">
+                        Actions <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li> <a [routerLink] = "['/bucketlists', bucketId,'items', item.id ]" class="btn btn-link">Update</a></li>
+                            <li> <a (click)='deleteItem(item.id)' class="btn btn-link">Delete</a> </li>
+                        </ul>
+                    </div> 
+                </td>
+            </tr>
+            </tbody>
+    </table>
+    <div>
+    <form (ngSubmit)="addItem()" novalidate>
+        <div>
+            <h4> Add items to bucketlist</h4>
+             <input type="text" placeholder="item name" name="name" [(ngModel)]="model.name" required  />
+        </div>
+        <div>
+            <button [disabled]="loading" class="btn btn-primary" type="submit">Add</button>
+        </div>
+    </form>
+    <div class="row">
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-4">
+            <button [disabled]="loading" (click)="onBack()" class="btn btn-primary" type="submit">Back</button>
         </div>
     </div>
-    <div>
-        <form (ngSubmit)="addItem()" novalidate>
-            <div>
-                 <input type="text" placeholder="item name" name="name" [(ngModel)]="model.name" required  />
-            </div>
-            <div>
-                <button [disabled]="loading" class="btn btn-primary" type="submit">Create</button>
-            </div>
-        </form>
-
-    </div>
-    <div class='panel-footer'> 
-        <a class='btn btn-default'(click)='onBack()' style='width:80px'>
-            <i class='glyphicon glyphicorn-chevron-left'></i> Back
-        </a>
-    </div>
+</div>
 </div>
