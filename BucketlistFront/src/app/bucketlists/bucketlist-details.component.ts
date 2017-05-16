@@ -35,12 +35,14 @@ export class BucketlistDetailComponent implements OnInit{
     }
 
     addItem(){
+        //Adds an item to a bucketlist
         this.itemService.createItem(this.bucketId, this.model).subscribe(items =>this.bucketlistItems = items)
         this.ngOnInit();
         this.model.name = '';
     }
   
     deleteItem(itemId){
+        // Deletes item with item id
         let bucketId = this._route.snapshot.params['bucketId'];
         this.itemService.deleteItem(bucketId, itemId).subscribe(items=> this.bucketlistItems = items);
         this.ngOnInit();

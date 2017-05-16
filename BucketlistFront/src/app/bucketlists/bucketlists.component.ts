@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { IBucketlist} from '../_models/bucketlist';
 import { AlertService } from '../_services/alert.service';
@@ -18,23 +18,63 @@ export class BucketlistComponent implements OnInit{
     loading = false;
     pageTitle: string = 'These are your bucketlists.';
     allBuckets : any=[];
+    page: number= 1;
+    limit: number =20;
+    q: string = '';
     errorMessage: string;
     bucketSearch: string;
     bucketlist;
     
     constructor(
         private router: Router,
+        private route: ActivatedRoute,
         private alertService: AlertService,
         private bucketlistService: BucketlistService
     ){}
     ngOnInit(): void{
-        this.bucketlistService.getBucketlists().subscribe(bucketlists => {
-            this.allBuckets = bucketlists[0];
+        this.route.queryParams
+        .subscribe(params =>{
+            if (params['page']){
+               this.page =+ params['page'] ;
+            }
+            if(params ['limit']){
+                this.limit =+ params ['limit'];
+            }
+            if (params['q']){
+               this.q = params['q']; 
+            }
+            this.bucketlistService.getBucketlists(this.q, this.page, this.limit ).subscribe(bucketlists => {
+            if(bucketlists){
+                this.allBuckets = bucketlists[0];
+             }
+            else{
+                this.alertService.error('No bucketlists found', true);
+            }
         },
         error => this.errorMessage = <any> error);
+        })
+    }
+    findNext(){
+        return this.bucketlistService.getNext()
+    }
+    findPrev(){
+        return this.bucketlistService.getPrevious()
+    }
+
+    nextPage(){
+        this.router.navigate(['/bucketlists'], {queryParams : {page:this.page + 1, limit: this.limit}})
+    }
+    previousPage(){
+        this.router.navigate(['/bucketlists'], {queryParams : {page:this.page - 1 , limit: this.limit}})
+    }
+
+    searchBucketlists(){
+        console.log(this.bucketSearch)
+        this.router.navigate(['/bucketlists'], {queryParams : {q:this.bucketSearch}})
     }
 
     createBucketlist(){
+        // Creates a bucketlist
         this.loading = true;
         this.bucketlistService.createBucketlist(this.model)
         .subscribe(
@@ -51,6 +91,7 @@ export class BucketlistComponent implements OnInit{
             });
     }
     deleteBucket(bucketId){
+        // Deletes a bucketlist
         this.loading=true;
         this.bucketlistService.deleteBucketlist(bucketId)
         .subscribe(
@@ -67,12 +108,12 @@ export class BucketlistComponent implements OnInit{
             });
     }
     getOneBucket(bucketId){
-        this.bucketlistService.getOneBucketlist(bucketId).subscribe(bucketlist => {
-            this.bucketlist = bucketlist;
-            console.log("hkjfuaikhnfakngakjngakjgn", this.bucketlist)
-            this.router.navigate(['/bucketlists/:id', bucketId])
-        },
-        error => this.errorMessage = <any> error);
+        // Gets one bucketlist
+    this.bucketlistService.getOneBucketlist(bucketId).subscribe(bucketlist => {
+    this.bucketlist = bucketlist;
+    this.router.navigate(['/bucketlists/:id', bucketId])
+    },
+    error => this.errorMessage = <any> error);
     }
 
 }

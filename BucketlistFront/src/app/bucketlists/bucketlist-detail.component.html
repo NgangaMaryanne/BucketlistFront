@@ -1,7 +1,4 @@
 <div class="table-responsive">
-    <div *ngIf = 'bucketlistItems && !bucketlistItems.length'>
-        You currently have no items in this bucketlist.
-    </div>
     <table class = "table" *ngIf = 'bucketlistItems && bucketlistItems.length'>
         <thead>
                 <tr>
@@ -16,7 +13,7 @@
                 <td> {{ item.done }}</td>
                 <td>
                     <div class="dropdown">
-                        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" data-hover="dropdown">
+                        <button class="btn btn-default dropdown-toggle bucketButton" type="button" data-toggle="dropdown" data-hover="dropdown">
                         Actions <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu">
@@ -35,7 +32,7 @@
              <input type="text" placeholder="item name" name="name" [(ngModel)]="model.name" required  />
         </div>
         <div>
-            <button [disabled]="loading" class="btn btn-primary" type="submit">Add</button>
+            <button [disabled]="loading" class="btn btn-primary bucketButton" type="submit">Add</button>
         </div>
     </form>
     <div class="row">
@@ -44,7 +41,7 @@
         <div class="col-md-4">
         </div>
         <div class="col-md-4">
-            <button [disabled]="loading" (click)="onBack()" class="btn btn-primary" type="submit">Back</button>
+            <button [disabled]="loading" (click)="onBack()" class="btn btn-primary bucketButton" type="submit">Back</button>
         </div>
     </div>
 </div>

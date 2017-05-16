@@ -18,9 +18,6 @@ const appRoutes: Routes = [
     {path: 'bucketlists/:bucketId', canActivate: [BucketlistDetailGuard], component: BucketlistDetailComponent},
     {path: 'updatebucket/:bucketId', canActivate:[BucketlistDetailGuard], component: BucketlistUpdateComponent},
     {path: 'bucketlists/:bucketId/items/:itemId', canActivate: [BucketlistDetailGuard], component: ItemUpdateComponent},
-    
- 
-    // otherwise redirect to home
     { path: '**', redirectTo: '' }
 ];
  

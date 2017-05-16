@@ -26,7 +26,7 @@ export class LoginComponent{
         this.authenticationService.login(this.model.email, this.model.password)
         .subscribe(
             data => {
-                this.router.navigate(['/bucketlists']);
+                this.router.navigate(['/bucketlists'],{queryParams : {page:1, limit:2}});
             },
             error => {
                 this.alertService.error(error._body);

@@ -21,6 +21,7 @@ export class ItemUpdateComponent{
         private itemService: BucketlistItemService,
     ){}
     updateItem(bucketid, itemId){
+        //Updates a bucketlist item
         this.loading = true;
         let bucketId = + this._route.snapshot.params['bucketId'];
         let itemid = + this._route.snapshot.params['itemId'];
@@ -28,11 +29,11 @@ export class ItemUpdateComponent{
         .subscribe(
             data => {
                 this.alertService.success('Item updated successfully', true);
-                this.router.navigate(['/bucketlists']);
+                this.router.navigate(['/bucketlists/'+bucketId]);
             },
             error =>{
                 this.alertService.error('Please try again', true);
-                this.router.navigate(['/bucketlists']);
+                this.router.navigate(['/bucketlists/' +bucketId]);
                 this.loading = false;
             });
         }
