@@ -21,6 +21,7 @@ export class BucketlistUpdateComponent{
         private bucketlistService: BucketlistService
     ){}
     updateBucket(bucketid){
+        //Updates a the bucketlist name
         this.loading = true;
         let bucketId = + this._route.snapshot.params['bucketId'];
         this.bucketlistService.updateBucketlist(bucketId, this.model)

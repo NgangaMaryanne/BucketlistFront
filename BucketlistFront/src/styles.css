@@ -2,7 +2,13 @@
 body{
     background-image: url('static/image8.jpg');
 }
-
-.page-title {
-    color: #ee6123;
+h1{
+    color:#772d02;
+}
+h3{
+    color:#ce8404;
+}
+.bucketButton{
+    background-color: #ce8404;
+    color:#FFFFFF;
 }

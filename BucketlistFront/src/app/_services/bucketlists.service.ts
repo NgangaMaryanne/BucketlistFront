@@ -11,12 +11,30 @@ import {IBucketlist} from '../_models/bucketlist';
 @Injectable()
 export class BucketlistService {
     header = this.makeHeaders();
+    nextPage = null;
+    prevPage = null;
     constructor (private http: Http, private config: AppConfig){}
     //Gets all bucketlists.
-    getBucketlists() :Observable <IBucketlist[]> {
-        return this.http.get(this.config.apiUrl + '/api/v1/bucketlists', { headers: this.header})
-        .map((response: Response) =><IBucketlist[]>response.json().results)
+    getBucketlists(q, page, limit) :Observable <IBucketlist[]> {
+        return this.http.get(this.config.apiUrl + '/api/v1/bucketlists?q='+q+'&page='+page+'&limit='+limit, { headers: this.header})
+        .map((response: Response) => {
+             this.nextPage = response.json().nextPage;
+            this.prevPage = response.json().previousPage;
+            if (<IBucketlist[]>response.json().results){
+                return <IBucketlist[]>response.json().results;
+            }
+            else{
+                return ;
+            }
+        })
          .catch(this.handleError);
+    }
+
+    getNext(){
+        return this.nextPage
+    }
+    getPrevious(){
+        return this.prevPage
     }
 
     //create one bucketlist.

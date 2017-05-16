@@ -1,26 +1,28 @@
 <div class = 'container'>
-    <div class='row'>
-            <div class='col-md-2'> Search bucketlists </div>
+    <div *ngIf ='!allBuckets.length' >
+     <h1> You have no bucketlists</h1>
+    </div>
+    <div class='row' *ngIf = 'allBuckets && allBuckets.length'>
             <div class='col-md-4'>
                 <input [(ngModel)] = 'bucketSearch' type='text' />
+                <button (click) = '(searchBucketlists())' class="btn btn-primary bucketButton" type="submit">Search</button>
             </div>
     </div>
-    <div class='table-responsive'>
-     <h1> {{pageTitle}}</h1>
-        <table class='table' *ngIf = 'allBuckets && allBuckets.length'>
+    <div class='table-responsive' *ngIf = 'allBuckets && allBuckets.length'>
+    <h1> {{pageTitle}}</h1>
+        <table class='table' >
+        
                 <thead>
                     <tr>
-                        <th> Id </th>
                         <th>Bucketlist</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor = 'let bucket of allBuckets | bucketlistSearch:bucketSearch'>
-                    <td> {{bucket.id }}</td>
+                    <tr *ngFor = 'let bucket of allBuckets'>
                         <td> <a [routerLink] = "['/bucketlists', bucket.id]" class="btn btn-link">{{ bucket.name }} </a> </td>
                         <td> 
                             <div class="dropdown">
-                                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" data-hover="dropdown">
+                                <button class="btn btn-default dropdown-toggle bucketButton" type="button" data-toggle="dropdown" data-hover="dropdown">
                                 Actions <span class="caret"></span>
                                 </button>
                                 <ul class="dropdown-menu">
@@ -34,13 +36,23 @@
     </table>
     </div>
     <div>
+        <div *ngIf = 'findPrev()'>
+            <button (click) = 'previousPage()' class="btn btn-primary bucketButton" type="submit">Previous Page</button>
+        </div>
+        <div *ngIf = 'findNext()'>
+            <button  (click)= 'nextPage()' class="btn btn-primary bucketButton" type="submit">Next Page</button>
+        </div>
+
+    </div>
+
+    <div>
     <h3> Add new Bucketlists</h3>
         <form (ngSubmit)="createBucketlist()" novalidate>
             <div>
                  <input type="text" placeholder="bucketlist name" name="name" [(ngModel)]="model.name" required />
             </div>
             <div>
-                <button [disabled]="loading" class="btn btn-primary" type="submit">Create</button>
+                <button [disabled]="loading" class="btn btn-primary bucketButton" type="submit">Create</button>
             </div>
         </form>
     </div>

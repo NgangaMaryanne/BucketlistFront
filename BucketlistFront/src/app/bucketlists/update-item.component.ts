@@ -21,6 +21,7 @@ export class ItemUpdateComponent{
         private itemService: BucketlistItemService,
     ){}
     updateItem(bucketid, itemId){
+        //Updates a bucketlist item
         this.loading = true;
         let bucketId = + this._route.snapshot.params['bucketId'];
         let itemid = + this._route.snapshot.params['itemId'];
