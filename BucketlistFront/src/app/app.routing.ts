@@ -5,7 +5,6 @@ import { LoginComponent } from './home/login.component';
 import { RegisterComponent } from './home/register.component';
 import { BucketlistComponent} from './bucketlists/bucketlists.component';
 import {BucketlistDetailComponent} from './bucketlists/bucketlist-details.component';
-import { ItemUpdateComponent } from './bucketlists/update-item.component';
 import { BucketlistDetailGuard } from './_services/bucketlist-guard.service';
 import { AuthGuard } from './_guards/auth.guard';
  
@@ -15,7 +14,6 @@ const appRoutes: Routes = [
     { path: 'register', component: RegisterComponent },
     {path: 'bucketlists', component: BucketlistComponent},
     {path: 'bucketlists/:bucketId', canActivate: [BucketlistDetailGuard], component: BucketlistDetailComponent},
-    {path: 'bucketlists/:bucketId/items/:itemId', canActivate: [BucketlistDetailGuard], component: ItemUpdateComponent},
     { path: '**', redirectTo: '' }
 ];
  

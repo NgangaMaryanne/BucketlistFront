@@ -24,10 +24,14 @@ export class BucketlistDetailComponent implements OnInit{
                 private bucketlistService: BucketlistService,
                 private itemService: BucketlistItemService){}
     ngOnInit(){
+        this.getOneBucket()
+    }
+    getOneBucket(){
         this.bucketlistService.getOneBucketlist(this.bucketId).subscribe(bucketlist => {
         this.bucketlistItems = bucketlist.items; 
         },
         error => this.errorMessage = <any> error);
+
     }
 
     onBack(): void{
@@ -40,7 +44,24 @@ export class BucketlistDetailComponent implements OnInit{
         this.ngOnInit();
         this.model.name = '';
     }
-  
+     
+    updateItem(itemId){
+        //Updates a bucketlist item
+        let bucketId = + this._route.snapshot.params['bucketId'];
+        this.itemService.updateItem(bucketId, itemId, this.model)
+        .subscribe(
+            data => {
+                this.alertService.success('Item updated successfully', true);
+                this.getOneBucket()
+                this.model='';
+            },
+            error =>{
+                this.alertService.error('Please try again', true);
+                this.getOneBucket()
+              
+            });
+        }
+
     deleteItem(itemId){
         // Deletes item with item id
         let bucketId = this._route.snapshot.params['bucketId'];

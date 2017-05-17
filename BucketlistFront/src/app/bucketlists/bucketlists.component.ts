@@ -100,11 +100,12 @@ export class BucketlistComponent implements OnInit{
         this.bucketlistService.updateBucketlist(bucketid, this.model)
         .subscribe(
             data => {
-                this.ngOnInit;
+                this.model='';
+                this.getBucketlists();
             },
             error =>{
                 this.alertService.error('Please try again', true);
-                this.ngOnInit();
+                this.getBucketlists();
                 this.loading = false;
             });
         }
