@@ -21,9 +21,9 @@
                      <a class="rotate-btn" data-card="card-1"><i class="fa fa-repeat"> <a [routerLink] = "['/bucketlists', bucket.id]" class="btn btn-link">View Items </a></i></a>
                 </div>
                 <div class="card-foot">
-                    <button class="btn btn-primary bucketButton" data-toggle="modal" 
+                    <button class="btn btn-sm btn-primary bucketButton" data-toggle="modal" 
                         data-target="#basicModal" >Update</button>
-                    <button (click)='deleteBucket(bucket.id)' class="btn btn-primary bucketButton">Delete</button>
+                    <button (click)='deleteBucket(bucket.id)' class="btn btn-sm btn-danger bucketButton">Delete</button>
                 </div>
             </div>  
             <!-- modal to update bucket -->
@@ -43,9 +43,9 @@
                             </div>
                             <div class="modal-footer">
                                 <div>
-                                    <button data-dismiss="modal"  [disabled]="loading" (click) = 'updateBucket(bucket.id)' class="btn btn-primary bucketButton" type="button">Update</button>
+                                    <button data-dismiss="modal"  [disabled]="loading" (click) = 'updateBucket(bucket.id)' class="btn btn-sm btn-primary bucketButton" type="button">Update</button>
                                 </div>
-                                <button type="button" class="btn btn-primary bucketButton" (click) = 'getBucketlists()' data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-sm btn-primary bucketButton" (click) = 'getBucketlists()' data-dismiss="modal">Close</button>
                         </div>
                     </div>
   </div>
@@ -69,10 +69,10 @@
     <div class="col-md-4 bucket-card" >
         <div class="card-wrap" >
         <div class="card-heading">
-            <h4> Add new bucketlist</h4>
+            <h4> Add bucketlist</h4>
         </div>
         <div class="card-content">
-            <form (ngSubmit)="createBucketlist()" novalidate>
+            <form  novalidate>
                 <div>
                      <input type="text" placeholder="bucketlist name" name="name" [(ngModel)]="model.name" required />
                 </div>
@@ -80,7 +80,7 @@
             </form>
         </div>
         <div class="card-foot">
-            <button [disabled]="loading" class="btn btn-primary bucketButton" type="submit">Create</button>
+            <button [disabled]="loading"  (click)="createBucketlist()" class="btn btn-sm btn-primary bucketButton" type="submit">Add</button>
         </div>
     </div>
 </div>

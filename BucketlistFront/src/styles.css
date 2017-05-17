@@ -4,24 +4,37 @@ body{
     background-size: cover;
 }
 h1{
-    color:#772d02;
+    color:#025aa5;
 }
 h3{
-    color:#ce8404;
+    color:#025aa5;
 }
 .bucketButton{
-    background-color: #684901;
     color:#FFFFFF;
 }
 .card-wrap{
     /*background-image: url('static/image8.jpg');*/
     box-shadow: 10px 10px 5px  grey;
     height: 100%;
-    border: rgba(221, 221, 221, 0.59) .5px solid;
-    padding: 40px 60px;
+    border: rgba(221, 221, 221, 0.59) .1px solid;
+    padding: 40px 80px;
 }
 .bucket-card{
     height: 190px;
     margin-bottom: 20px;
     margin-top: 20px;
+}
+.form-container{
+    background-color: #8c9ca7;
+    margin-top: 10%;
+    padding: 20px;
+    opacity: 0.7;
+    border-radius: 10px;
+    border: #31708f 0.5px solid;
+}
+.form-buttons{
+    margin:10px 20%;
+}
+.bucket-form{
+    color:#FFFFFF;
 }

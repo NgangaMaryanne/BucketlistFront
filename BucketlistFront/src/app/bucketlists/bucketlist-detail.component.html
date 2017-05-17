@@ -1,52 +1,3 @@
-<!-- <div class="table-responsive">
-    <table class = "table" *ngIf = 'bucketlistItems && bucketlistItems.length'>
-        <thead>
-                <tr>
-                    <th>Items</th>
-                    <th> Done</th>
-                    <th> Actions </th>
-                </tr>
-            </thead>
-            <tbody > 
-            <tr *ngFor = 'let item of bucketlistItems'>
-                <td> {{ item.name }}</td>
-                <td> {{ item.done }}</td>
-                <td>
-                    <div class="dropdown">
-                        <button class="btn btn-default dropdown-toggle bucketButton" type="button" data-toggle="dropdown" data-hover="dropdown">
-                        Actions <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li> <a [routerLink] = "['/bucketlists', bucketId,'items', item.id ]" class="btn btn-link">Update</a></li>
-                            <li> <a (click)='deleteItem(item.id)' class="btn btn-link">Delete</a> </li>
-                        </ul>
-                    </div> 
-                </td>
-            </tr>
-            </tbody>
-    </table>
-    <div>
-    <form (ngSubmit)="addItem()" novalidate>
-        <div>
-            <h4> Add items to bucketlist</h4>
-             <input type="text" placeholder="item name" name="name" [(ngModel)]="model.name" required  />
-        </div>
-        <div>
-            <button [disabled]="loading" class="btn btn-primary bucketButton" type="submit">Add</button>
-        </div>
-    </form>
-    <div class="row">
-        <div class="col-md-4">
-        </div>
-        <div class="col-md-4">
-        </div>
-        <div class="col-md-4">
-            <button [disabled]="loading" (click)="onBack()" class="btn btn-primary bucketButton" type="submit">Back</button>
-        </div>
-    </div>
-</div>
-</div>
- -->
  <div class="container">
      <div *ngIf = '!bucketlistItems.length'>
         <div class="row">
@@ -67,8 +18,8 @@
                     </div>
                 </div>
                 <div class="card-foot">
-                    <a [routerLink] = "['/bucketlists', bucketId,'items', item.id ]" class="btn btn-primary">Update</a>
-                    <a (click)='deleteItem(item.id)' class="btn btn-primary">Delete</a>
+                    <button [routerLink] = "['/bucketlists', bucketId,'items', item.id ]" class="btn btn-sm btn-primary">Update</button>
+                    <button (click)='deleteItem(item.id)' class="btn btn-sm btn-danger">Delete</button>
                 </div>
             </div>
         </div>
@@ -84,7 +35,7 @@
                     <input type="text" placeholder="item name" name="name" [(ngModel)]="model.name" required  />
                 </div>
                 <div class="card-foot">
-                     <button [disabled]="loading" (click)='addItem()' class="btn btn-primary bucketButton" type="submit">Add</button>
+                     <button [disabled]="loading" (click)='addItem()' class="btn btn-primary btn-sm bucketButton" type="submit">Add</button>
                 </div>
 
             </div>
