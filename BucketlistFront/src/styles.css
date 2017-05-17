@@ -13,16 +13,19 @@ h3{
     color:#FFFFFF;
 }
 .card-wrap{
-    /*background-image: url('static/image8.jpg');*/
+    
     box-shadow: 10px 10px 5px  grey;
     height: 100%;
+    width: 100%;
     border: rgba(221, 221, 221, 0.59) .1px solid;
     padding: 40px 80px;
 }
 .bucket-card{
     height: 190px;
+    width:100%;
     margin-bottom: 20px;
     margin-top: 20px;
+    width: 100%;
 }
 .form-container{
     background-color: #8c9ca7;
@@ -37,4 +40,7 @@ h3{
 }
 .bucket-form{
     color:#FFFFFF;
+}
+.bucket-container{
+    padding:10px;
 }

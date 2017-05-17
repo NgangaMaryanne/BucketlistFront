@@ -1,11 +1,27 @@
  <div class="container">
-     <div *ngIf = '!bucketlistItems.length'>
+    <div *ngIf = '!bucketlistItems.length'>
         <div class="row">
             <div class="col-md-6 offset-md-3">
                 <h1>This bucketlist has no items.</h1>
             </div>
         </div>
-     </div>
+    </div>
+    <div>
+        <div class="bucket-card col-md-6 offset-md-3">
+            <div class="card-wrap">
+                <div class="card-head">
+                    <h4> Add item</h4>
+                </div>
+                <div class="card-content">
+                    <input type="text" placeholder="item name" name="name" [(ngModel)]="model.name" required  />
+                </div>
+                <div class="card-foot">
+                     <button [disabled]="loading" (click)='addItem()' class="btn btn-primary btn-sm bucketButton" type="submit">Add</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
      <div class ="row" *ngIf = 'bucketlistItems && bucketlistItems.length'>
         <div class="bucket-card col-md-4"  *ngFor = 'let item of bucketlistItems'>
             <div class="card-wrap">
@@ -24,23 +40,7 @@
             </div>
         </div>
     </div>
-    <div class="row">
     
-        <div class="bucket-card col-md-4">
-            <div class="card-wrap">
-                <div class="card-head">
-                    <h4> Add item</h4>
-                </div>
-                <div class="card-content">
-                    <input type="text" placeholder="item name" name="name" [(ngModel)]="model.name" required  />
-                </div>
-                <div class="card-foot">
-                     <button [disabled]="loading" (click)='addItem()' class="btn btn-primary btn-sm bucketButton" type="submit">Add</button>
-                </div>
-
-            </div>
-        </div>
-    </div>
     <div class="row">
         <div class="col-md-4">
             <button [disabled]="loading" (click)="onBack()" class="btn btn-primary bucketButton" type="submit">Back</button>
