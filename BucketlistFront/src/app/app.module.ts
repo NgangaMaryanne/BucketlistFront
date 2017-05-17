@@ -18,7 +18,6 @@ import { LoginComponent } from './home/login.component';
 import { RegisterComponent } from './home/register.component';
 import {WelcomeComponent} from './home/welcome.component';
 import { BucketlistComponent} from './bucketlists/bucketlists.component';
-import { BucketlistUpdateComponent} from './bucketlists/bucketlist-update.component';
 import {BucketlistDetailComponent } from './bucketlists/bucketlist-details.component';
 import { ItemUpdateComponent} from './bucketlists/update-item.component';
 import {BucketlistDetailGuard } from './_services/bucketlist-guard.service';
@@ -33,7 +32,6 @@ import {BucketlistDetailGuard } from './_services/bucketlist-guard.service';
     WelcomeComponent,
     BucketlistComponent, 
     BucketlistDetailComponent,
-    BucketlistUpdateComponent,
      ItemUpdateComponent
   ],
   imports: [

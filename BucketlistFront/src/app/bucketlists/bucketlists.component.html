@@ -1,59 +1,87 @@
-<div class = 'container'>
+<div class="container">
     <div *ngIf ='!allBuckets.length' >
-     <h1> You have no bucketlists</h1>
+        <h1> You have no bucketlists</h1>
     </div>
     <div class='row' *ngIf = 'allBuckets && allBuckets.length'>
-            <div class='col-md-4'>
-                <input [(ngModel)] = 'bucketSearch' type='text' />
-                <button (click) = '(searchBucketlists())' class="btn btn-primary bucketButton" type="submit">Search</button>
-            </div>
+        <div class='col-md-4'>
+            <input [(ngModel)] = 'bucketSearch' type='text' />
+            <button (click) = '(searchBucketlists())' class="btn btn-primary bucketButton" type="submit">Search</button>
+        </div>
     </div>
-    <div class='table-responsive' *ngIf = 'allBuckets && allBuckets.length'>
-    <h1> {{pageTitle}}</h1>
-        <table class='table' >
-        
-                <thead>
-                    <tr>
-                        <th>Bucketlist</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor = 'let bucket of allBuckets'>
-                        <td> <a [routerLink] = "['/bucketlists', bucket.id]" class="btn btn-link">{{ bucket.name }} </a> </td>
-                        <td> 
-                            <div class="dropdown">
-                                <button class="btn btn-default dropdown-toggle bucketButton" type="button" data-toggle="dropdown" data-hover="dropdown">
-                                Actions <span class="caret"></span>
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li> <a [routerLink] = "['/updatebucket', bucket.id]" class="btn btn-link">Update</a></li>
-                                    <li> <a (click)='deleteBucket(bucket.id)' class="btn btn-link">Delete</a> </li>
-                                </ul>
-                            </div> 
-                        </td>
-                    </tr>
-                </tbody>
-    </table>
+
+    <div class="row" *ngIf = 'allBuckets && allBuckets.length'>
+        <div class="col-md-4 bucket-card" *ngFor = 'let bucket of allBuckets'>
+            <div class="card-wrap">
+                <div class="card-image">
+                </div>
+                <div class="card-heading">
+                    <h4>{{ bucket.name }} </h4>
+                </div>
+                <div class="card-content">
+                     <a class="rotate-btn" data-card="card-1"><i class="fa fa-repeat"> <a [routerLink] = "['/bucketlists', bucket.id]" class="btn btn-link">View Items </a></i></a>
+                </div>
+                <div class="card-foot">
+                    <button class="btn btn-primary bucketButton" data-toggle="modal" 
+                        data-target="#basicModal" >Update</button>
+                    <button (click)='deleteBucket(bucket.id)' class="btn btn-primary bucketButton">Delete</button>
+                </div>
+            </div>  
+            <!-- modal to update bucket -->
+                <div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <button type="button" class="close bucketButton" data-dismiss="modal" aria-hidden="true"></button>
+                            <h4 class="modal-title" id="myModalLabel">Edit bucketlist</h4>
+                            </div>
+                            <div class="modal-body">
+                                <form  novalidate>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="updatename" [(ngModel)]="model.name" #name="ngModel" required />
+                                </div>
+                            </form>
+                            </div>
+                            <div class="modal-footer">
+                                <div>
+                                    <button data-dismiss="modal"  [disabled]="loading" (click) = 'updateBucket(bucket.id)' class="btn btn-primary bucketButton" type="button">Update</button>
+                                </div>
+                                <button type="button" class="btn btn-primary bucketButton" (click) = 'getBucketlists()' data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+  </div>
+</div>
+
+        </div>
     </div>
-    <div>
-        <div *ngIf = 'findPrev()'>
+
+    <div class ="row">
+         <div *ngIf = 'findPrev()'>
             <button (click) = 'previousPage()' class="btn btn-primary bucketButton" type="submit">Previous Page</button>
         </div>
         <div *ngIf = 'findNext()'>
             <button  (click)= 'nextPage()' class="btn btn-primary bucketButton" type="submit">Next Page</button>
         </div>
-
-    </div>
-
-    <div>
-    <h3> Add new Bucketlists</h3>
-        <form (ngSubmit)="createBucketlist()" novalidate>
-            <div>
-                 <input type="text" placeholder="bucketlist name" name="name" [(ngModel)]="model.name" required />
-            </div>
-            <div>
-                <button [disabled]="loading" class="btn btn-primary bucketButton" type="submit">Create</button>
-            </div>
-        </form>
     </div>
 </div>
+
+
+<div class="row ">
+    <div class="col-md-4 bucket-card" >
+        <div class="card-wrap" >
+        <div class="card-heading">
+            <h4> Add new bucketlist</h4>
+        </div>
+        <div class="card-content">
+            <form (ngSubmit)="createBucketlist()" novalidate>
+                <div>
+                     <input type="text" placeholder="bucketlist name" name="name" [(ngModel)]="model.name" required />
+                </div>
+                
+            </form>
+        </div>
+        <div class="card-foot">
+            <button [disabled]="loading" class="btn btn-primary bucketButton" type="submit">Create</button>
+        </div>
+    </div>
+</div>
+

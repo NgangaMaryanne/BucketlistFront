@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 body{
-    background-image: url('static/image8.jpg');
+    background-image: url('static/image12.jpg');
+    background-size: cover;
 }
 h1{
     color:#772d02;
@@ -9,6 +10,18 @@ h3{
     color:#ce8404;
 }
 .bucketButton{
-    background-color: #ce8404;
+    background-color: #684901;
     color:#FFFFFF;
+}
+.card-wrap{
+    /*background-image: url('static/image8.jpg');*/
+    box-shadow: 10px 10px 5px  grey;
+    height: 100%;
+    border: rgba(221, 221, 221, 0.59) .5px solid;
+    padding: 40px 60px;
+}
+.bucket-card{
+    height: 190px;
+    margin-bottom: 20px;
+    margin-top: 20px;
 }

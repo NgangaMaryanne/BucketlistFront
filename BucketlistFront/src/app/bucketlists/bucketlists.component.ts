@@ -32,6 +32,9 @@ export class BucketlistComponent implements OnInit{
         private bucketlistService: BucketlistService
     ){}
     ngOnInit(): void{
+        this.getBucketlists();
+    }
+    getBucketlists(){
         this.route.queryParams
         .subscribe(params =>{
             if (params['page']){
@@ -90,6 +93,22 @@ export class BucketlistComponent implements OnInit{
                 this.loading = false;
             });
     }
+
+    updateBucket(bucketid){
+        //Updates a the bucketlist name
+        this.loading = true;
+        this.bucketlistService.updateBucketlist(bucketid, this.model)
+        .subscribe(
+            data => {
+                this.ngOnInit;
+            },
+            error =>{
+                this.alertService.error('Please try again', true);
+                this.ngOnInit();
+                this.loading = false;
+            });
+        }
+
     deleteBucket(bucketId){
         // Deletes a bucketlist
         this.loading=true;
