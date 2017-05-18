@@ -69,7 +69,6 @@ export class BucketlistDetailComponent implements OnInit{
             data => {
                 this.alertService.success('Item updated successfully', true);
                 this.getOneBucket()
-                this.model='';
             },
             error =>{
                 this.alertService.error('Please try again', true);

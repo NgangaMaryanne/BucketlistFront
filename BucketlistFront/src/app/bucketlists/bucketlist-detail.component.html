@@ -39,7 +39,7 @@
                 </div>
                 <div class="card-foot">
                     <button  class="btn btn-sm btn-primary" data-toggle="modal" 
-                            data-target="#itemModal">Update</button>
+                            data-target="#itemModal">Edit</button>
                     <button (click)='deleteItem(item.id)' class="btn btn-sm btn-danger">Delete</button>
                 </div>
             </div>
@@ -59,7 +59,7 @@
                         </div>
                         <div class="modal-footer">
                             <div>
-                                <button data-dismiss="modal"  [disabled]="loading" (click) = 'updateItemName(item.id)' class="btn btn-sm btn-primary bucketButton" type="button">Update</button>
+                                <button data-dismiss="modal"  [disabled]="loading" (click) = 'updateItemName(item.id)' class="btn btn-sm btn-primary bucketButton" type="button">Save</button>
                             </div>
                             <button type="button" class="btn btn-sm btn-primary bucketButton" (click) = 'getOneBucket()' data-dismiss="modal">Close</button>
                         </div>
