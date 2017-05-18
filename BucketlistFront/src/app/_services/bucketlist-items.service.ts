@@ -19,12 +19,17 @@ export class BucketlistItemService{
         return this.http.post(this.config.apiUrl + '/api/v1/bucketlists/' + bucketId+ '/items', itemData,  {headers: this.header});
     }
 
-    updateItem(bucketId, itemId, updatedItem:IItem){
+    updateItemName(bucketId, itemId, updatedItem:IItem){
         let Updateditem = {
             "name":updatedItem.name,
-            "done": updatedItem.done
         }
          return this.http.put(this.config.apiUrl + '/api/v1/bucketlists/' + bucketId+ '/items/' + itemId, Updateditem,  {headers: this.header});
+    }
+    updateItemDone(bucketId, itemId, itemDone){
+        let Updateditem = {
+            "done":itemDone
+        }
+        return this.http.put(this.config.apiUrl + '/api/v1/bucketlists/' + bucketId+ '/items/' + itemId, Updateditem,  {headers: this.header});
     }
 
     deleteItem(bucketId, itemId){

@@ -18,10 +18,11 @@ h3{
     height: 100%;
     width: 100%;
     border: rgba(221, 221, 221, 0.59) .1px solid;
-    padding: 40px 80px;
+    padding: 40px 70px;
+    text-align: center;
 }
 .bucket-card{
-    height: 190px;
+    height: 100%;
     width:100%;
     margin-bottom: 20px;
     margin-top: 20px;
@@ -43,4 +44,7 @@ h3{
 }
 .bucket-container{
     padding:10px;
+}
+.card-content{
+    margin: 20px;
 }

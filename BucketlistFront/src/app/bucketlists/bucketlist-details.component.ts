@@ -45,10 +45,26 @@ export class BucketlistDetailComponent implements OnInit{
         this.model.name = '';
     }
      
-    updateItem(itemId){
+    updateItemName(itemId){
         //Updates a bucketlist item
         let bucketId = + this._route.snapshot.params['bucketId'];
-        this.itemService.updateItem(bucketId, itemId, this.model)
+        this.itemService.updateItemName(bucketId, itemId, this.model)
+        .subscribe(
+            data => {
+                this.alertService.success('Item updated successfully', true);
+                this.getOneBucket()
+                this.model='';
+            },
+            error =>{
+                this.alertService.error('Please try again', true);
+                this.getOneBucket()
+              
+            });
+        }
+
+     updateItemDone(itemId, itemDone){
+        let bucketId = + this._route.snapshot.params['bucketId'];
+        this.itemService.updateItemDone(bucketId, itemId, itemDone)
         .subscribe(
             data => {
                 this.alertService.success('Item updated successfully', true);
