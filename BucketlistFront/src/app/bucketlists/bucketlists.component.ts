@@ -91,7 +91,7 @@ export class BucketlistComponent implements OnInit{
             },
             error =>{
                 this.alertService.error('Please try again');
-                this.router.navigate(['/bucketlists']);
+                this.router.navigate(['/bucketlists'],{queryParams : {page:1, limit:2}});
                 this.loading = false;
             });
     }

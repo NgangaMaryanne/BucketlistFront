@@ -40,7 +40,7 @@ export class BucketlistDetailComponent implements OnInit{
     }
 
     onBack(): void{
-        this._router.navigate(['/bucketlists']);
+        this._router.navigate(['/bucketlists'],{queryParams : {page:1, limit:2}});
     }
 
     addItem(){
