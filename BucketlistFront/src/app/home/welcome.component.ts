@@ -9,6 +9,6 @@ import { Component } from '@angular/core';
 })
 
 export class WelcomeComponent{
-    pageTitle: string = 'What do you want to do?'
+    pageTitle: string = 'Bucketlist'
 
 }
