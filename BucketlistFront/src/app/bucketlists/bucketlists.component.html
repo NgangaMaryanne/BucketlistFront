@@ -41,7 +41,6 @@
                     </div>
                     <div class="card-heading">
                         <h4>{{ bucket.name }} </h4>
-                        <h3>{{bucket.id}}</h3>
                     </div>
                     <div class="card-content">
                          <a class="rotate-btn" data-card="card-1"><i class="fa fa-repeat"> <a [routerLink] = "['/bucketlists', bucket.id]" class="btn btn-link">View Items </a></i></a>
@@ -58,12 +57,15 @@
         </div>
 
         <div class ="row">
-             <div *ngIf = 'findPrev()'>
+            <div class ="col-md-4">
+            </div>
+            <div class="col-sm-2" *ngIf = 'findPrev()'>
                 <button (click) = 'previousPage()' class="btn btn-primary bucketButton" type="submit">Previous Page</button>
             </div>
-            <div *ngIf = 'findNext()'>
+            <div class="col-sm-2" *ngIf = 'findNext()'>
                 <button  (click)= 'nextPage()' class="btn btn-primary bucketButton" type="submit">Next Page</button>
             </div>
+            
         </div>
     </div>
 
