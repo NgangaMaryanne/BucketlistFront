@@ -13,6 +13,7 @@ export class AlertService {
             if (event instanceof NavigationStart){
                 if (this.keepAfterNavigationChange){
                     this.keepAfterNavigationChange = false;
+                    this.subject.next();
                 }
                 else{
                     this.subject.next();

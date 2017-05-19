@@ -35,35 +35,11 @@
                     <div  class="done-button" *ngIf = 'item.done ===false'>
                         <button (click)='updateItemDone(item.id, "true")' class="btn btn-sm btn-danger"> Not done</button>
                     </div>
-
                 </div>
                 <div class="card-foot">
                     <button  class="btn btn-sm btn-primary" data-toggle="modal" 
-                            data-target="#itemModal">Edit</button>
+                            data-target="#itemModal" (click) = 'setItemId(item.id)' >Edit</button>
                     <button (click)='deleteItem(item.id)' class="btn btn-sm btn-danger">Delete</button>
-                </div>
-            </div>
-            <div class="modal fade" id="itemModal" tabindex="-1" role="dialog" aria-labelledby="itemModal" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                        <button type="button" class="close bucketButton" data-dismiss="modal" aria-hidden="true"></button>
-                        <h4 class="modal-title" id="myModalLabel">Edit Item</h4>
-                        </div>
-                        <div class="modal-body">
-                            <form  novalidate>
-                            <div class="form-group">
-                                <input type="text" class="form-control" name="updatename" [(ngModel)]="model.name" #name="ngModel" required />
-                            </div>
-                        </form>
-                        </div>
-                        <div class="modal-footer">
-                            <div>
-                                <button data-dismiss="modal"  [disabled]="loading" (click) = 'updateItemName(item.id)' class="btn btn-sm btn-primary bucketButton" type="button">Save</button>
-                            </div>
-                            <button type="button" class="btn btn-sm btn-primary bucketButton" (click) = 'getOneBucket()' data-dismiss="modal">Close</button>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -76,3 +52,27 @@
         </div>
     </div>
  </div>
+
+ <div class="modal fade" id="itemModal" tabindex="-1" role="dialog" aria-labelledby="itemModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <button type="button" class="close bucketButton" data-dismiss="modal" aria-hidden="true"></button>
+            <h4 class="modal-title" id="myModalLabel">Edit Item</h4>
+            </div>
+            <div class="modal-body">
+                <form  novalidate>
+                <div class="form-group">
+                    <input type="text" class="form-control" name="updatename" [(ngModel)]="model.name" #name="ngModel" required />
+                </div>
+            </form>
+            </div>
+            <div class="modal-footer">
+                <div>
+                    <button  [disabled]="loading" (click) = 'updateItemName(itemId)' class="btn btn-sm btn-primary bucketButton" type="button">Save</button>
+                </div>
+                <button type="button" class="btn btn-sm btn-primary bucketButton" (click) = 'getOneBucket()' data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, NgZone } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { IBucketlist} from '../_models/bucketlist';
@@ -24,15 +24,20 @@ export class BucketlistComponent implements OnInit{
     errorMessage: string;
     bucketSearch: string;
     bucketlist;
+    bucketId: number;
     
     constructor(
         private router: Router,
         private route: ActivatedRoute,
         private alertService: AlertService,
-        private bucketlistService: BucketlistService
+        private bucketlistService: BucketlistService,
+        private zone: NgZone
     ){}
     ngOnInit(): void{
         this.getBucketlists();
+    }
+    refreshPage(){
+        this.zone.runOutsideAngular(() => {location.reload();});
     }
     getBucketlists(){
         this.route.queryParams
@@ -50,9 +55,6 @@ export class BucketlistComponent implements OnInit{
             if(bucketlists){
                 this.allBuckets = bucketlists[0];
              }
-            else{
-                this.alertService.error('No bucketlists found', true);
-            }
         },
         error => this.errorMessage = <any> error);
         })
@@ -82,31 +84,39 @@ export class BucketlistComponent implements OnInit{
         this.bucketlistService.createBucketlist(this.model)
         .subscribe(
             data => {
-                this.alertService.success('Bucketlist created successfully', true);
+                this.alertService.success('Bucketlist created successfully');
                 this.ngOnInit();
                 this.loading = false;
                 this.model.name = '';
             },
             error =>{
-                this.alertService.error('Please try again', true);
+                this.alertService.error('Please try again');
                 this.router.navigate(['/bucketlists']);
                 this.loading = false;
             });
     }
+    setBucketId(bucketId){
+        this.bucketId = bucketId
+    }
 
     updateBucket(bucketid){
         //Updates a the bucketlist name
+
         this.loading = true;
+        console.log(bucketid)
         this.bucketlistService.updateBucketlist(bucketid, this.model)
         .subscribe(
             data => {
-                this.model='';
-                this.getBucketlists();
+                this.alertService.success('Bucketlist updated successfully');
+                this.model ='';
+                this.loading=false;
+                this.ngOnInit();
             },
             error =>{
-                this.alertService.error('Please try again', true);
-                this.getBucketlists();
+                this.alertService.error('Please try again');
                 this.loading = false;
+                this.model='';
+                this.ngOnInit()
             });
         }
 
@@ -116,14 +126,13 @@ export class BucketlistComponent implements OnInit{
         this.bucketlistService.deleteBucketlist(bucketId)
         .subscribe(
             data => {
-                this.alertService.success('Bucketlist deleted successfully', true);
-                this.ngOnInit();
+                this.alertService.success('Bucketlist deleted successfully');
                 this.loading = false;
-                this.model.name = '';
+                this.refreshPage()
             },
             error =>{
-                this.alertService.error('Please try again', true);
-                this.router.navigate(['/bucketlists']);
+                this.alertService.error('Please try again');
+                this.ngOnInit()
                 this.loading = false;
             });
     }

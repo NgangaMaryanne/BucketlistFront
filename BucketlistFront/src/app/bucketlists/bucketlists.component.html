@@ -41,41 +41,18 @@
                     </div>
                     <div class="card-heading">
                         <h4>{{ bucket.name }} </h4>
+                        <h3>{{bucket.id}}</h3>
                     </div>
                     <div class="card-content">
                          <a class="rotate-btn" data-card="card-1"><i class="fa fa-repeat"> <a [routerLink] = "['/bucketlists', bucket.id]" class="btn btn-link">View Items </a></i></a>
                     </div>
                     <div class="card-foot">
                         <button class="btn btn-sm btn-primary bucketButton" data-toggle="modal" 
-                            data-target="#bucketModal" >Update</button>
+                            data-target="#bucketModal"  (click)='setBucketId(bucket.id)' >Update</button>
                         <button (click)='deleteBucket(bucket.id)' class="btn btn-sm btn-danger bucketButton">Delete</button>
                     </div>
                 </div>  
-                <!-- modal to update bucket -->
-                <div class="modal fade" id="bucketModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                            <button type="button" class="close bucketButton" data-dismiss="modal" aria-hidden="true"></button>
-                            <h4 class="modal-title" id="myModalLabel">Edit Bucketlist</h4>
-                            </div>
-                            <div class="modal-body">
-                                <form  novalidate>
-                                <div class="form-group">
-                                    <input type="text" class="form-control" name="updatename" [(ngModel)]="model.name" #name="ngModel" required />
-                        
-                                </div>
-                            </form>
-                            </div>
-                            <div class="modal-footer">
-                                <div>
-                                    <button data-dismiss="modal"  [disabled]="loading" (click) = 'updateBucket(bucket.id)' class="btn btn-sm btn-primary bucketButton" type="button">Update</button>
-                                </div>
-                                <button type="button" class="btn btn-sm btn-primary bucketButton" (click) = 'getBucketlists()' data-dismiss="modal">Close</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                
 
             </div>
         </div>
@@ -91,6 +68,39 @@
     </div>
 
 
+<!-- modal to update bucket -->
+<div class="modal fade" id="bucketModal" tabindex="-1" role="dialog" aria-labelledby="bucketModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <button type="button" class="close bucketButton" data-dismiss="modal" aria-hidden="true"></button>
+            <h4 class="modal-title" id="myModalLabel">Edit Bucketlist</h4>
+            </div>
+            <div class="modal-body">
+                <form  novalidate>
+                <div class="form-group">
+                    <input type="text" class="form-control" name="updatename" [(ngModel)]="model.name" #name="ngModel" required />
+        
+                </div>
+            </form>
+            </div>
+            <div class="modal-footer">
+                <div>
+                    <button data-dismiss="modal"  [disabled]="loading" (click) = 'updateBucket(bucketId)' class="btn btn-sm btn-primary update-button bucketButton" type="button">Update</button>
+                </div>
+                <button type="button" class="btn btn-sm btn-primary bucketButton" (click) = 'getBucketlists()' data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 
-
+<script>
+$(document).ready(function () {
+    $('#bucketModal').on('show.bs.modal', function (event) {
+      var button = $(event.relatedTarget) 
+      var bucketId = button.data('bucketId') 
+      var modal = $(this)  
+      modal.find('button.update-button').val(bucketId)})
+      })
+</script>

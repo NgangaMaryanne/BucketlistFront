@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, NgZone} from '@angular/core';
 import { ActivatedRoute, Router} from '@angular/router';
 
 import { IBucketlist} from '../_models/bucketlist';
@@ -17,14 +17,19 @@ export class BucketlistDetailComponent implements OnInit{
     errorMessage: string;
     model:any = {};
     bucketId = + this._route.snapshot.params['bucketId'];
+    itemId: number;
 
     constructor(private _router: Router,
+                private zone: NgZone,
                 private _route: ActivatedRoute,
                 private alertService: AlertService,
                 private bucketlistService: BucketlistService,
                 private itemService: BucketlistItemService){}
     ngOnInit(){
         this.getOneBucket()
+    }
+    refreshPage(){
+        this.zone.runOutsideAngular(() => {location.reload();});
     }
     getOneBucket(){
         this.bucketlistService.getOneBucketlist(this.bucketId).subscribe(bucketlist => {
@@ -40,24 +45,39 @@ export class BucketlistDetailComponent implements OnInit{
 
     addItem(){
         //Adds an item to a bucketlist
-        this.itemService.createItem(this.bucketId, this.model).subscribe(items =>this.bucketlistItems = items)
-        this.ngOnInit();
-        this.model.name = '';
+        this.itemService.createItem(this.bucketId, this.model)
+        .subscribe(items =>{
+            this.bucketlistItems = items
+            this.alertService.success('Item added');
+            this.ngOnInit();
+            this.model.name = '';
+        },
+        error => {
+            this.alertService.error('Please try again');
+            this.ngOnInit();
+            this.model.name = '';
+        })
+        
+    }
+    setItemId(itemId){
+        this.itemId = itemId;
     }
      
     updateItemName(itemId){
+        console.log(itemId)
         //Updates a bucketlist item
         let bucketId = + this._route.snapshot.params['bucketId'];
         this.itemService.updateItemName(bucketId, itemId, this.model)
         .subscribe(
             data => {
-                this.alertService.success('Item updated successfully', true);
-                this.getOneBucket()
+                this.alertService.success('Item updated successfully', false);
                 this.model='';
+                this.refreshPage();
+
             },
             error =>{
-                this.alertService.error('Please try again', true);
-                this.getOneBucket()
+                this.alertService.error('Please try again', false);
+                this.refreshPage();
               
             });
         }
@@ -67,11 +87,11 @@ export class BucketlistDetailComponent implements OnInit{
         this.itemService.updateItemDone(bucketId, itemId, itemDone)
         .subscribe(
             data => {
-                this.alertService.success('Item updated successfully', true);
-                this.getOneBucket()
+                this.alertService.success('Item updated successfully', false);
+                this.getOneBucket();
             },
             error =>{
-                this.alertService.error('Please try again', true);
+                this.alertService.error('Please try again', false);
                 this.getOneBucket()
               
             });
@@ -80,7 +100,16 @@ export class BucketlistDetailComponent implements OnInit{
     deleteItem(itemId){
         // Deletes item with item id
         let bucketId = this._route.snapshot.params['bucketId'];
-        this.itemService.deleteItem(bucketId, itemId).subscribe(items=> this.bucketlistItems = items);
-        this.ngOnInit();
+        this.itemService.deleteItem(bucketId, itemId)
+        .subscribe(
+                   items=> {
+                       this.bucketlistItems = items
+                       this.alertService.success('Item deleted successfully', false);
+                        this.getOneBucket()
+                   }, 
+                   error =>{
+                        this.alertService.error('Please try again', false);
+                        this.getOneBucket()
+                   });
     }
 }
