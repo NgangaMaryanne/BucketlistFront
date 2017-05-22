@@ -1,48 +1,78 @@
-<div class="table-responsive">
-    <table class = "table" *ngIf = 'bucketlistItems && bucketlistItems.length'>
-        <thead>
-                <tr>
-                    <th>Items</th>
-                    <th> Done</th>
-                    <th> Actions </th>
-                </tr>
-            </thead>
-            <tbody > 
-            <tr *ngFor = 'let item of bucketlistItems'>
-                <td> {{ item.name }}</td>
-                <td> {{ item.done }}</td>
-                <td>
-                    <div class="dropdown">
-                        <button class="btn btn-default dropdown-toggle bucketButton" type="button" data-toggle="dropdown" data-hover="dropdown">
-                        Actions <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li> <a [routerLink] = "['/bucketlists', bucketId,'items', item.id ]" class="btn btn-link">Update</a></li>
-                            <li> <a (click)='deleteItem(item.id)' class="btn btn-link">Delete</a> </li>
-                        </ul>
-                    </div> 
-                </td>
-            </tr>
-            </tbody>
-    </table>
+ <div class="container">
+    <div *ngIf = '!bucketlistItems.length'>
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <h1>This bucketlist has no items.</h1>
+            </div>
+        </div>
+    </div>
     <div>
-    <form (ngSubmit)="addItem()" novalidate>
-        <div>
-            <h4> Add items to bucketlist</h4>
-             <input type="text" placeholder="item name" name="name" [(ngModel)]="model.name" required  />
+        <div class="bucket-card col-md-6 offset-md-3">
+            <div class="card-wrap">
+                <div class="card-head">
+                    <h4> Add item</h4>
+                </div>
+                <div class="card-content">
+                    <input type="text" placeholder="item name" name="name" [(ngModel)]="model.name" required  />
+                </div>
+                <div class="card-foot">
+                     <button [disabled]="loading" (click)='addItem()' class="btn btn-primary btn-sm bucketButton" type="submit">Add</button>
+                </div>
+
+            </div>
         </div>
-        <div>
-            <button [disabled]="loading" class="btn btn-primary bucketButton" type="submit">Add</button>
+    </div>
+    <div class ="row" *ngIf = 'bucketlistItems && bucketlistItems.length'>
+        <div class="bucket-card col-md-4"  *ngFor = 'let item of bucketlistItems'>
+            <div class="card-wrap">
+                <div class="card-head" >
+                    <h3>{{item.name}}</h3>
+                </div>
+                <div class="card-content">
+                    <div class="done-button" *ngIf = 'item.done ===true'>
+                        <button (click)='updateItemDone(item.id, "false")' class="btn btn-sm btn-success"> Done</button>
+                    </div>
+                    <div  class="done-button" *ngIf = 'item.done ===false'>
+                        <button (click)='updateItemDone(item.id, "true")' class="btn btn-sm btn-danger"> Not done</button>
+                    </div>
+                </div>
+                <div class="card-foot">
+                    <button  class="btn btn-sm btn-primary" data-toggle="modal" 
+                            data-target="#itemModal" (click) = 'setItemId(item.id)' >Edit</button>
+                    <button (click)='deleteItem(item.id)' class="btn btn-sm btn-danger">Delete</button>
+                </div>
+            </div>
         </div>
-    </form>
+
+    </div>
+    
     <div class="row">
-        <div class="col-md-4">
-        </div>
-        <div class="col-md-4">
-        </div>
         <div class="col-md-4">
             <button [disabled]="loading" (click)="onBack()" class="btn btn-primary bucketButton" type="submit">Back</button>
         </div>
     </div>
-</div>
+ </div>
+
+ <div class="modal fade" id="itemModal" tabindex="-1" role="dialog" aria-labelledby="itemModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <button type="button" class="close bucketButton" data-dismiss="modal" aria-hidden="true"></button>
+            <h4 class="modal-title" id="myModalLabel">Edit Item</h4>
+            </div>
+            <div class="modal-body">
+                <form  novalidate>
+                <div class="form-group">
+                    <input type="text" class="form-control" name="updatename" [(ngModel)]="model.name" #name="ngModel" required />
+                </div>
+            </form>
+            </div>
+            <div class="modal-footer">
+                <div>
+                    <button  [disabled]="loading" (click) = 'updateItemName(itemId)' class="btn btn-sm btn-primary bucketButton" type="button">Save</button>
+                </div>
+                <button type="button" class="btn btn-sm btn-primary bucketButton" (click) = 'getOneBucket()' data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
 </div>

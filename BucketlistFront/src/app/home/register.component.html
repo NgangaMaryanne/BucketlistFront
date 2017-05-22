@@ -1,5 +1,9 @@
-<div class="container">
-    <form name="form" (ngSubmit)="register()" novalidate>
+
+<div class="col-md-4 offset-md-4 form-container">
+    <form class="bucket-form" name="form" (ngSubmit)="register()" novalidate>
+            <div style="text-align: center;">
+                <h3 > Register</h3>
+            </div>
             <div class="form-group">
                 <label for="firstName">First Name</label>
                 <input type="text" class="form-control" name="firstName" [(ngModel)]="firstName" required />
@@ -23,9 +27,13 @@
                 <input type="text" class="form-control" name="password" [(ngModel)]="model.password" #password="ngModel" required />
         
             </div>
-            <div>
+    </form>
+</div>
+<div class="row">
+    <div class="col-md-4 offset-md-4">
+         <div class="form-buttons">
                 <button [disabled]="loading" class="btn btn-primary" type="submit">Register</button>
                 <a [routerLink]="['/login']" class="btn btn-link">Login</a>
             </div>
-    </form>
+    </div>
 </div>

@@ -1,14 +1,80 @@
 /* You can add global styles to this file, and also import other style files */
 body{
-    background-image: url('static/image8.jpg');
+   background-color: lightgrey;
 }
-h1{
-    color:#772d02;
+h1, h3, h5 {
+    color:#025aa5;
 }
-h3{
-    color:#ce8404;
-}
+
 .bucketButton{
-    background-color: #ce8404;
     color:#FFFFFF;
+
+}
+.card-wrap{
+    
+    box-shadow: 10px 10px 5px  grey;
+    height: 100%;
+    width: 100%;
+    border: rgba(221, 221, 221, 0.59) .1px solid;
+    padding: 40px 70px;
+    text-align: center;
+    background-color: #EEE;
+    border-radius: 10px;
+
+}
+.bucket-card{
+    height: 100%;
+    width:100%;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    width: 100%;
+    border-radius: 10px;
+
+
+}
+.form-container{
+    background-color: #8c9ca7;
+    margin-top: 10%;
+    padding: 20px;
+    opacity: 0.7;
+    border-radius: 10px;
+    border: #31708f 0.5px solid;
+}
+.form-buttons{
+    margin:10px 20%;
+}
+.bucket-form{
+    color:#FFFFFF;
+}
+.card-content{
+    margin: 20px;
+}
+.bucket-nav{
+    height:60px;
+}
+.welcome-container{
+    height:100%;
+    width:100%;
+    
+    background-size: cover;
+}
+.heading-row{
+    height:40%;
+    width:40%;
+} 
+.bucket-container{
+    height:100%;
+    width: 100%;
+}
+.bucketlist-container{
+    padding: 20px;
+}
+.welcome-card1{
+    background-image: url(./static/image14.jpg);
+    background-size: cover;
+    
+}
+.welcome-card{
+    background-image: url(./static/image15.jpg);
+    background-size: cover;
 }

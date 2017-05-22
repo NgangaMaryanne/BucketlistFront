@@ -1,9 +1,42 @@
-<div  class='row'>
- <div class="col-md-4">
+<div class="welcome-container">
+    <div class="row">
+        <div class="col-md-8" style="padding-left: 100px; padding-top: 20px">
+            <div class="row" style="height: 300px; padding: 20px">
+                <div class="col-md-4 bucket-card">
+                    <div class="card-wrap welcome-card">
+                        <h5>Go to Ibiza</h5>
+                        <button class="btn-sm btn btn-danger">Not done</button>
+                    </div>
+                </div>
+                <div class="bucket-card col-md-4">
+                    <div class="card-wrap welcome-card1">
+                        <h5> Swim the red sea</h5>
+                        <button class="btn-sm btn btn-success">Done</button>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="height: 300px; padding: 20px">
+                <div class="bucket-card col-md-4">
+                    <div class="card-wrap welcome-card1">
+                    <h5> Read James Patterson</h5>
+                    <button class="btn-sm btn btn-success">Done</button>
+                    </div>
+                </div>
+                <div class="bucket-card col-md-4">
+                    <div class="card-wrap welcome-card">
+                     <h5> Sponsor a child</h5>
+                     <button class="btn-sm btn btn-danger">Not done</button>
+                    </div>
+                </div>
+            </div>
         </div>
-    <div class="col-md-6 " >
-        <h1> {{pageTitle}}</h1>
-        <a [routerLink]="['/register']" class="btn btn-orange bucketButton"> Register </a>
-        <a [routerLink]="['/login']" class="btn btn-orange bucketButton"> Login</a>
+        <div class="col-md-4" style="padding-left: 50px; padding-top: 60px">
+          <h5> Join </h5>
+                <a [routerLink]="['/register']" class="btn btn-sm btn-primary bucketButton"> Register </a>
+            <h5> Already have an account?</h5>
+                <a [routerLink]="['/login']" class="btn btn-sm btn-primary bucketButton"> Login</a>
+          
+        </div>
     </div>
+
 </div>
