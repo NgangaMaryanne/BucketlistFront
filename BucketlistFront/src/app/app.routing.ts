@@ -7,7 +7,6 @@ import { BucketlistComponent} from './bucketlists/bucketlists.component';
 import {BucketlistDetailComponent} from './bucketlists/bucketlist-details.component';
 import { BucketlistDetailGuard } from './_services/bucketlist-guard.service';
 import { AuthGuard } from './_guards/auth.guard';
- 
 const appRoutes: Routes = [
     { path: '', component: WelcomeComponent, canActivate: [AuthGuard] },
     { path: 'login', component: LoginComponent },
@@ -16,5 +15,4 @@ const appRoutes: Routes = [
     {path: 'bucketlists/:bucketId', canActivate: [BucketlistDetailGuard], component: BucketlistDetailComponent},
     { path: '**', redirectTo: '' }
 ];
- 
 export const routing = RouterModule.forRoot(appRoutes);

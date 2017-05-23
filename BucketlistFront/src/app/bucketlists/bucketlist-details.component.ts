@@ -10,12 +10,12 @@ import { BucketlistItemService } from '../_services/bucketlist-items.service';
 @Component({
     templateUrl: 'bucketlist-detail.component.html'
 })
-export class BucketlistDetailComponent implements OnInit{
-    pageTitle: "This one bucketlist";
+export class BucketlistDetailComponent implements OnInit {
+    pageTitle = 'This one bucketlist';
     bucketlist: IBucketlist;
-    bucketlistItems:any=[];
+    bucketlistItems: any = [];
     errorMessage: string;
-    model:any = {};
+    model: any = {};
     bucketId = + this._route.snapshot.params['bucketId'];
     itemId: number;
 
@@ -24,30 +24,30 @@ export class BucketlistDetailComponent implements OnInit{
                 private _route: ActivatedRoute,
                 private alertService: AlertService,
                 private bucketlistService: BucketlistService,
-                private itemService: BucketlistItemService){}
-    ngOnInit(){
-        this.getOneBucket()
+                private itemService: BucketlistItemService) {}
+    ngOnInit() {
+        this.getOneBucket();
     }
-    refreshPage(){
-        this.zone.runOutsideAngular(() => {location.reload();});
+    refreshPage() {
+        this.zone.runOutsideAngular(() => {location.reload(); });
     }
-    getOneBucket(){
+    getOneBucket() {
         this.bucketlistService.getOneBucketlist(this.bucketId).subscribe(bucketlist => {
-        this.bucketlistItems = bucketlist.items; 
+        this.bucketlistItems = bucketlist.items;
         },
         error => this.errorMessage = <any> error);
 
     }
 
-    onBack(): void{
-        this._router.navigate(['/bucketlists'],{queryParams : {page:1, limit:2}});
+    onBack(): void {
+        this._router.navigate(['/bucketlists'], {queryParams : {page: 1, limit: 2}});
     }
 
-    addItem(){
-        //Adds an item to a bucketlist
+    addItem() {
+        // Adds an item to a bucketlist
         this.itemService.createItem(this.bucketId, this.model)
-        .subscribe(items =>{
-            this.bucketlistItems = items
+        .subscribe(items => {
+            this.bucketlistItems = items;
             this.alertService.success('Item added');
             this.ngOnInit();
             this.model.name = '';
@@ -56,60 +56,54 @@ export class BucketlistDetailComponent implements OnInit{
             this.alertService.error('Please try again');
             this.ngOnInit();
             this.model.name = '';
-        })
-        
+        });
     }
-    setItemId(itemId){
+    setItemId(itemId) {
         this.itemId = itemId;
     }
-     
-    updateItemName(itemId){
-        console.log(itemId)
-        //Updates a bucketlist item
-        let bucketId = + this._route.snapshot.params['bucketId'];
+    updateItemName(itemId) {
+        // Updates a bucketlist item
+        const bucketId = + this._route.snapshot.params['bucketId'];
         this.itemService.updateItemName(bucketId, itemId, this.model)
         .subscribe(
             data => {
                 this.alertService.success('Item updated successfully', false);
-                this.model='';
+                this.model = '';
                 this.refreshPage();
 
             },
-            error =>{
+            error => {
                 this.alertService.error('Please try again', false);
                 this.refreshPage();
-              
             });
         }
-
-     updateItemDone(itemId, itemDone){
-        let bucketId = + this._route.snapshot.params['bucketId'];
+    updateItemDone(itemId, itemDone) {
+        const bucketId = + this._route.snapshot.params['bucketId'];
         this.itemService.updateItemDone(bucketId, itemId, itemDone)
         .subscribe(
             data => {
                 this.alertService.success('Item updated successfully', false);
                 this.getOneBucket();
             },
-            error =>{
+            error => {
                 this.alertService.error('Please try again', false);
-                this.getOneBucket()
-              
+                this.getOneBucket();
             });
         }
 
-    deleteItem(itemId){
+    deleteItem(itemId) {
         // Deletes item with item id
-        let bucketId = this._route.snapshot.params['bucketId'];
+        const bucketId = this._route.snapshot.params['bucketId'];
         this.itemService.deleteItem(bucketId, itemId)
         .subscribe(
-                   items=> {
-                       this.bucketlistItems = items
+                   items => {
+                       this.bucketlistItems = items;
                        this.alertService.success('Item deleted successfully', false);
-                        this.getOneBucket()
-                   }, 
-                   error =>{
+                       this.getOneBucket();
+                   },
+                   error => {
                         this.alertService.error('Please try again', false);
-                        this.getOneBucket()
+                        this.getOneBucket();
                    });
     }
 }
