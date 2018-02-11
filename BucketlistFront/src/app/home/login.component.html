@@ -2,7 +2,7 @@
         <div style="text-align: center;" >
             <h3> Login </h3>
         </div>
-        <form class="login bucket-form" (ngSubmit)="login()" novalidate>
+        <form class="login bucket-form" name="form" (ngSubmit)="login()" novalidate>
             <div class= "form-group">
                 <label for="email">Email</label>
                 <input class="form-control" type="text" placeholder="email" name="email" [(ngModel)]="model.email" required  />
@@ -12,7 +12,7 @@
                 <input class="form-control" type="password" placeholder="Password" name="password" [(ngModel)]="model.password" required   />
             </div>
             <div>
-                <button [disabled]="loading" class="btn btn-primary">Login</button>
+                <button [disabled]="loading" class="btn btn-primary" type="submit">Login</button>
                 <a [routerLink]="['/register']" class="btn btn-link">Register</a>
             </div>
         </form>
