@@ -6,79 +6,78 @@ import { AlertService } from '../_services/alert.service';
 import { BucketlistService} from '../_services/bucketlists.service';
 
 @Component({
-    selector: 'bl-bucketlists',
+    selector: 'app-bucketlists',
     templateUrl: 'bucketlists.component.html',
     moduleId: module.id,
 
 }
 )
 
-export class BucketlistComponent implements OnInit{
+export class BucketlistComponent implements OnInit {
     model: any = {};
     loading = false;
-    pageTitle: string = 'These are your bucketlists.';
-    allBuckets : any=[];
-    page: number= 1;
-    limit: number =20;
-    q: string = '';
+    pageTitle = 'These are your bucketlists.';
+    allBuckets: any = [];
+    page= 1;
+    limit= 20;
+    q= '';
     errorMessage: string;
     bucketSearch: string;
     bucketlist;
     bucketId: number;
-    
     constructor(
         private router: Router,
         private route: ActivatedRoute,
         private alertService: AlertService,
         private bucketlistService: BucketlistService,
         private zone: NgZone
-    ){}
-    ngOnInit(): void{
+    ) {}
+    ngOnInit(): void {
         this.getBucketlists();
     }
-    refreshPage(){
-        this.zone.runOutsideAngular(() => {location.reload();});
+    refreshPage() {
+        this.zone.runOutsideAngular(() => {location.reload(); });
     }
-    getBucketlists(){
+    getBucketlists() {
         this.route.queryParams
-        .subscribe(params =>{
-            if (params['page']){
-               this.page =+ params['page'] ;
+        .subscribe(params => {
+            if (params['page']) {
+               this.page = + params['page'] ;
             }
-            if(params ['limit']){
-                this.limit =+ params ['limit'];
+            if (params ['limit']) {
+                this.limit = + params ['limit'];
             }
-            if (params['q']){
-               this.q = params['q']; 
+            if (params['q']) {
+               this.q = params['q'];
             }
             this.bucketlistService.getBucketlists(this.q, this.page, this.limit ).subscribe(bucketlists => {
-            if(bucketlists){
+            if (bucketlists) {
                 this.allBuckets = bucketlists[0];
              }
         },
         error => this.errorMessage = <any> error);
-        })
+        });
     }
-    findNext(){
-        return this.bucketlistService.getNext()
+    findNext() {
+        return this.bucketlistService.getNext();
     }
-    findPrev(){
-        return this.bucketlistService.getPrevious()
-    }
-
-    nextPage(){
-        this.router.navigate(['/bucketlists'], {queryParams : {page:this.page + 1, limit: this.limit}})
-    }
-    previousPage(){
-        this.router.navigate(['/bucketlists'], {queryParams : {page:this.page - 1 , limit: this.limit}})
+    findPrev() {
+        return this.bucketlistService.getPrevious();
     }
 
-    searchBucketlists(){
-        console.log(this.bucketSearch)
-        this.router.navigate(['/bucketlists'], {queryParams : {q:this.bucketSearch}})
+    nextPage() {
+        this.router.navigate(['/bucketlists'], {queryParams : {page: this.page + 1, limit: this.limit}});
+    }
+    previousPage() {
+        this.router.navigate(['/bucketlists'], {queryParams : {page: this.page - 1 , limit: this.limit}});
     }
 
-    createBucketlist(){
+    searchBucketlists() {
+        console.log(this.bucketSearch);
+        this.router.navigate(['/bucketlists'], {queryParams : {q: this.bucketSearch}});
+    }
+
+    createBucketlist() {
         // Creates a bucketlist
         this.loading = true;
         this.bucketlistService.createBucketlist(this.model)
@@ -89,60 +88,59 @@ export class BucketlistComponent implements OnInit{
                 this.loading = false;
                 this.model.name = '';
             },
-            error =>{
+            error => {
                 this.alertService.error('Please try again');
-                this.router.navigate(['/bucketlists'],{queryParams : {page:1, limit:2}});
+                this.router.navigate(['/bucketlists'], {queryParams : {page: 1, limit: 2}});
                 this.loading = false;
             });
     }
-    setBucketId(bucketId){
-        this.bucketId = bucketId
+    setBucketId(bucketId) {
+        this.bucketId = bucketId;
     }
 
-    updateBucket(bucketid){
-        //Updates a the bucketlist name
+    updateBucket(bucketid) {
+        // Updates a the bucketlist name
 
         this.loading = true;
-        console.log(bucketid)
         this.bucketlistService.updateBucketlist(bucketid, this.model)
         .subscribe(
             data => {
                 this.alertService.success('Bucketlist updated successfully');
-                this.model ='';
-                this.loading=false;
+                this.model = '';
+                this.loading = false;
                 this.ngOnInit();
             },
-            error =>{
+            error => {
                 this.alertService.error('Please try again');
                 this.loading = false;
-                this.model='';
-                this.ngOnInit()
+                this.model = '';
+                this.ngOnInit();
             });
         }
 
-    deleteBucket(bucketId){
+    deleteBucket(bucketId) {
         // Deletes a bucketlist
-        this.loading=true;
+        this.loading = true;
         this.bucketlistService.deleteBucketlist(bucketId)
         .subscribe(
             data => {
                 this.alertService.success('Bucketlist deleted successfully');
                 this.loading = false;
-                this.refreshPage()
+                this.refreshPage();
             },
-            error =>{
+            error => {
                 this.alertService.error('Please try again');
-                this.ngOnInit()
+                this.ngOnInit();
                 this.loading = false;
             });
     }
-    getOneBucket(bucketId){
+    getOneBucket(bucketId) {
         // Gets one bucketlist
     this.bucketlistService.getOneBucketlist(bucketId).subscribe(bucketlist => {
     this.bucketlist = bucketlist;
-    this.router.navigate(['/bucketlists/:id', bucketId])
+    this.router.navigate(['/bucketlists/:id', bucketId]);
     },
+
     error => this.errorMessage = <any> error);
     }
-
 }

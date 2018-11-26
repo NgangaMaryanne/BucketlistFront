@@ -1,4 +1,4 @@
-export class IItem{
+export class IItem {
     id: number;
     name: string;
     date_created: number;

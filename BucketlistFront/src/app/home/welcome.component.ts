@@ -1,14 +1,13 @@
 import { Component } from '@angular/core';
 
 @Component({
-    selector: 'bl-welcome',
+    selector: 'app-welcome',
     moduleId: module.id,
     templateUrl: 'welcome.component.html',
     styleUrls: ['welcome.component.css']
 
 })
 
-export class WelcomeComponent{
-    pageTitle: string = 'Bucketlist'
-
+export class WelcomeComponent {
+    pageTitle: 'Bucketlist';
 }

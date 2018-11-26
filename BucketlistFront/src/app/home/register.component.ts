@@ -4,23 +4,20 @@ import { Router } from '@angular/router';
 import { AlertService } from '../_services/alert.service';
 import { RegisterService } from '../_services/register.service';
 @Component({
-    selector: 'bl-register',
+    selector: 'app-register',
     moduleId: module.id,
-    templateUrl: 'register.component.html',
-    
+    templateUrl: 'register.component.html'
 })
-export class RegisterComponent{
+export class RegisterComponent {
     model: any = {};
     loading = false;
-    pageTitle: string = 'Register';
-    
-
+    pageTitle: 'Register';
     constructor (
         private router: Router,
         private registerService: RegisterService,
-        private alertService: AlertService){}
+        private alertService: AlertService) {}
 
-    register(){
+    register() {
         this.loading = true;
         this.registerService.createNew(this.model)
         .subscribe(
@@ -28,7 +25,7 @@ export class RegisterComponent{
                 this.alertService.success('Registration successful', true);
                 this.router.navigate(['/login']);
             },
-            error =>{
+            error => {
                 this.alertService.error('Please try again', true);
                 this.loading = false;
             });
